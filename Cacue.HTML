@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Calculator</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .calculator-container {
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+            width: 400px;
+            max-width: 90%;
+        }
+
+        .calculator-container h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+
+        .input-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            outline: none;
+        }
+
+        .upload-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        button {
+            padding: 10px 15px;
+            background: #2a5298;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background: #1e3c72;
+        }
+
+        .output {
+            margin-top: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator-container">
+        <h1>Advanced Calculator</h1>
+        <div class="input-container">
+            <textarea id="mathInput" placeholder="Enter your mathematical problem here (e.g., integrate(x^2), solve(x^2+5=0))"></textarea>
+            <div class="upload-container">
+                <label for="fileUpload" style="cursor: pointer;">Upload Image:</label>
+                <input type="file" id="fileUpload" accept="image/*">
+            </div>
+            <button onclick="solveMath()">Solve</button>
+        </div>
+        <div id="output" class="output"></div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.11.0/math.min.js"></script>
+    <script>
+        function solveMath() {
+            const input = document.getElementById('mathInput').value;
+            const outputDiv = document.getElementById('output');
+            try {
+                const result = math.evaluate(input);
+                outputDiv.innerHTML = `<strong>Result:</strong> ${result}`;
+            } catch (error) {
+                outputDiv.innerHTML = `<strong>Error:</strong> ${error.message}`;
+            }
+        }
+
+        document.getElementById('fileUpload').addEventListener('change', (event) => {
+            const file = event.target.files[0];
+            if (file) {
+                // Placeholder for image upload processing
+                const outputDiv = document.getElementById('output');
+                outputDiv.innerHTML = `<strong>Image uploaded:</strong> ${file.name}<br>Processing images requires integration with advanced libraries (e.g., TensorFlow.js or APIs).`;
+            }
+        });
+    </script>
+</body>
+</html>
